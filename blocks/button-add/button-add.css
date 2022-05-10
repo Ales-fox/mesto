@@ -1,4 +1,4 @@
-.button__add {
+.button-add {
     background-image: url(../../../images/button__add.svg);
     width: 17%;
     height: 50px;
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 450px) {
-    .button__add {
+    .button-add {
         width: 100%;
         height: 50px;
     }

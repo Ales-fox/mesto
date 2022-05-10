@@ -14,10 +14,10 @@
 @import url(../blocks/profile/__status/profile__status.css);
 
 @import url(../blocks/button/button.css);
-@import url(../blocks/button/__edit/button__edit.css);
-@import url(../blocks/button/__add/button__add.css);
-@import url(../blocks/button/__save/button__save.css);
-@import url(../blocks/button/__close/button__close.css);
+@import url(../blocks/button-edit/button-edit.css);
+@import url(../blocks/button-add/button-add.css);
+@import url(../blocks/button-save/button-save.css);
+@import url(../blocks/button-close/button-close.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__opened/popup__opened.css);
