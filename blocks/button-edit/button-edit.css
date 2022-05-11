@@ -1,7 +1,7 @@
 .button-edit {
     width: 24px;
     height: 24px;
-    background-image: url(../../../images/editButton.svg);
+    background-image: url(../../images/editButton.svg);
     background-color: black;
     border: 1px solid white;
     border: none;

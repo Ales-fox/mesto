@@ -1,19 +1,13 @@
 .button-close {
     width: 32px;
     height: 32px;
-    background-image: url(../../../images/button__close.svg);
+    background-image: url(../../images/button__close.svg);
     background-color: black;
-    position: relative;
-    right: -235px;
-    top: -170px;
+    position: absolute;
+    right: -35px;
+    top: -36px;
     border: none;
     padding: 0;
-}
-
-@media screen and (max-width: 800px) {
-    .button-close {
-        top: -150px;
-    }
 }
 
 @media screen and (max-width: 450px) {
@@ -21,7 +15,6 @@
         width: 20px;
         height: 20px;
         background-size: cover;
-        right: -130px;
-        top: -290px;
+        right: 0px;
     }
 }

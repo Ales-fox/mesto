@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профиль</title>
+    <title>Mesto</title>
     <meta name="description" content="Места где я побывал">
     <meta name="Author" content="Делибалт Александра">
     <link rel="stylesheet" href="./pages/index.css">
@@ -19,21 +19,11 @@
     <section class="profile">
         <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Аватарка">
         <div class="profile__info">
-            <h3 class="profile__name over ">Жак-Ив Кусто</h3>
-            <button class="button-edit button"></button>
-            <p class="profile__status over">Исследователь океана</p>
+            <h1 class="profile__name over "></h1>
+            <button class="button-edit button" type="button"></button>
+            <p class="profile__status over"></p>
         </div>
-        <button class="button-add button"></button>
-    </section>
-
-    <section class="popup">
-        <form class="popup__container">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" placeholder="Имя" value="Жак-Ив Кусто" class="input input_name">
-            <input type="text" placeholder="О себе" value="Исследователь океана" class="input input_status">
-            <button class="button-save button">Сохранить</button>
-        </form>
-        <button type="button" class="button-close button"></button>
+        <button class="button-add button" type="button"></button>
     </section>
 
     <main class="cards">
@@ -41,42 +31,42 @@
             <img class="card__photo" src="./images/card__abchazia.jpg" alt="Абхазия">
             <div class="card__info">
                 <h3 class="card__title over">Абхазия</h3>
-                <img class="like" src="./images/like.svg" alt="Лайк">
+                <button class="button-like button" type="button"></button>
             </div>
         </div>
         <div class="card">
             <img class="card__photo" src="./images/card__altay.jpg" alt="Алтай">
             <div class="card__info">
                 <h3 class="card__title over">Алтай</h3>
-                <img class="like" src="./images/like.svg" alt="Лайк">
+                <button class="button-like button" type="button"></button>
             </div>
         </div>
         <div class="card">
             <img class="card__photo" src="./images/card__dombay.jpg" alt="Домбай">
             <div class="card__info">
                 <h3 class="card__title over">Домбай</h3>
-                <img class="like" src="./images/like.svg" alt="Лайк">
+                <button class="button-like button" type="button"></button>
             </div>
         </div>
         <div class="card">
             <img class="card__photo" src="./images/card__kamchatka.jpg" alt="Камчатка">
             <div class="card__info">
                 <h3 class="card__title over">Камчатка</h3>
-                <img class="like" src="./images/like.svg" alt="Лайк">
+                <button class="button-like button" type="button"></button>
             </div>
         </div>
         <div class="card">
             <img class="card__photo" src="./images/card__karachaevo-cherkessia.jpg" alt="Карачаево-Черкессия">
             <div class="card__info">
                 <h3 class="card__title over">Карачаево-Черкессия</h3>
-                <img class="like" src="./images/like.svg" alt="Лайк">
+                <button class="button-like button" type="button"></button>
             </div>
         </div>
         <div class="card">
             <img class="card__photo" src="./images/card__mountain-elbrus.jpg" alt="Гора Эльбрус">
             <div class="card__info">
                 <h3 class="card__title over">Эльбрус</h3>
-                <img class="like" src="./images/like.svg" alt="Лайк">
+                <button class="button-like button" type="button"></button>
             </div>
         </div>
     </main>
@@ -84,6 +74,19 @@
     <footer class="footer">
         <p class="footer__copyright">© 2022 Делибалт Александра</p>
     </footer>
+
+    <section class="popup">
+        <form class="popup__container" action="URL" method="get" name="form_about-you">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" placeholder="Имя" value="Жак-Ив Кусто" class="input input_name" name="input_name">
+            <input type="text" placeholder="О себе" value="Исследователь океана" class="input input_status"
+                name="input_status">
+            <button class="button-save button" type="submit">Сохранить</button>
+            <button class="button-close button" type="button"></button>
+        </form>
+
+    </section>
+
     <script src="script.js"></script>
 </body>
 
