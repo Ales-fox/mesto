@@ -5,8 +5,17 @@
     background-color: black;
     border: 1px solid white;
     border: none;
-    margin-left: 18px;
-    align-self: center;
+    grid-column: 2/3;
+    align-self: flex-end;
+    justify-self: start;
+}
+
+@media screen and (max-width: 700px) {
+    .button-edit {
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -14,6 +23,6 @@
         width: 18px;
         height: 18px;
         background-size: cover;
-        margin-left: 10px;
+        margin-left: 0;
     }
 }

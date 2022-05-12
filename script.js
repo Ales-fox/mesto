@@ -10,6 +10,8 @@ const popupContainer = popup.querySelector('.popup__container');
 
 function openEdit() {
     popup.classList.add('popup_opened');
+    inputName.value = profileName.textContent;
+    inputStatus.value = profileStatus.textContent;
 }
 
 function closeEdit() {
@@ -20,7 +22,16 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value;
     profileStatus.textContent = inputStatus.value;
+    over()
     closeEdit();
+}
+function over() {
+    if (profileName.textContent.length > 15) {
+        profileName.classList.add('over');
+    }
+    if (profileStatus.textContent.length > 30) {
+        profileStatus.classList.add('over');
+    }
 }
 
 buttonEdit.addEventListener('click', openEdit);

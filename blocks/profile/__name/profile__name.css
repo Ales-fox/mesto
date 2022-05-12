@@ -1,28 +1,38 @@
 .profile__name {
-    margin: 0 0 16px 0;
-    max-width: 90%;
+    margin: 0;
+    width: 100%;
+    max-height: 39px;
     font-family: Inter, serif, Arial;
     font-style: normal;
     font-weight: 500;
     font-size: 42px;
     line-height: 114%;
-    text-align: start;
-    display: flex;
+    grid-column: 1/2;
+
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 1050px) {
     .profile__name {
-        font-size: 28px;
+        font-size: 30px;
         line-height: 100%;
-        max-width: 70%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .profile__name {
+        font-size: 22px;
     }
 }
 
 @media screen and (max-width: 450px) {
     .profile__name {
+        text-align: center;
         font-size: 27px;
         line-height: 33px;
-        text-align: center;
-        margin: 0 auto 14px auto;
+        margin: auto;
+        margin-left: 46px;
+        max-height: 26px;
+        text-align: start;
     }
 }

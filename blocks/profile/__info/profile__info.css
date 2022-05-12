@@ -4,11 +4,22 @@
     color: white;
     align-self: center;
     max-width: 336px;
+    display: grid;
+    grid-template-columns: minmax(fit-content, 294px) 0.5fr;
+    gap: 16px 18px;
+}
+
+@media screen and (max-width: 700px) {
+    .profile__info {
+        grid-template-columns: minmax(100px, 170px) 20px;
+    }
 }
 
 @media screen and (max-width: 450px) {
     .profile__info {
+        gap: 14px 10px;
         width: 100%;
+        grid-template-columns: auto 18px;
         margin-bottom: 36px;
     }
 }
