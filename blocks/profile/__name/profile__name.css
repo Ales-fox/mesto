@@ -1,6 +1,5 @@
 .profile__name {
     margin: 0;
-    width: 100%;
     max-height: 39px;
     font-family: Inter, serif, Arial;
     font-style: normal;
@@ -8,7 +7,6 @@
     font-size: 42px;
     line-height: 114%;
     grid-column: 1/2;
-    white-space: nowrap;
 }
 
 @media screen and (max-width: 1050px) {
@@ -28,9 +26,8 @@
     .profile__name {
         font-size: 27px;
         line-height: 33px;
-        margin: auto;
-        margin-left: 20%;
         max-height: 26px;
-        text-align: start;
+        text-align: center;
+        grid-column: 2/3;
     }
 }

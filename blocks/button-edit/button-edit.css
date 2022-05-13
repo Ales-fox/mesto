@@ -24,5 +24,6 @@
         height: 18px;
         background-size: cover;
         margin-left: 0;
+        grid-column: 3/-1;
     }
 }

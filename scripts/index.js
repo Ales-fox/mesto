@@ -22,16 +22,7 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value;
     profileStatus.textContent = inputStatus.value;
-    over()
     closeEdit();
-}
-function over() {
-    if (profileName.textContent.length > 15) {
-        profileName.classList.add('over');
-    }
-    if (profileStatus.textContent.length > 30) {
-        profileStatus.classList.add('over');
-    }
 }
 
 buttonEdit.addEventListener('click', openEdit);
