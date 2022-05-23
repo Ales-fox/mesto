@@ -13,7 +13,7 @@ let inputURL = popupFormAdd.querySelector('.input_url');
 const popupContainerEdit = document.querySelector('.popup__container_edit');
 const popupContainerAdd = document.querySelector('.popup__container_add');
 const cards = document.querySelector('.cards');
-const popupPhoto = document.querySelector('.popup__photo');
+const popupPhoto = document.querySelector('.popup_photo');
 const initialCards = [
     {
         name: 'Абхазия',
