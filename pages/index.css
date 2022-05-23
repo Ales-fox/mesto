@@ -18,12 +18,18 @@
 @import url(../blocks/button-add/button-add.css);
 @import url(../blocks/button-save/button-save.css);
 @import url(../blocks/button-close/button-close.css);
+@import url(../blocks/button-close/_photo/button-close_photo.css);
 @import url(../blocks/button-like/button-like.css);
+@import url(../blocks/button-like/_active/button-like_active.css);
+@import url(../blocks/button-delete/button-delete.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__bigPhoto/popup__bigPhoto.css);
+
+@import url(../blocks/wrapper/wrapper.css);
 
 @import url(../blocks/input/input.css);
 

@@ -1,5 +1,7 @@
 .popup_opened {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
+    transition: all 1s linear;
 }
 
 .popup_opened::before {
@@ -10,5 +12,5 @@
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 0.5;
+    opacity: 0.9;
 }

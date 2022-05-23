@@ -27,65 +27,53 @@
     </section>
 
     <main class="cards">
-        <div class="card">
-            <img class="card__photo" src="./images/card__abchazia.jpg" alt="Абхазия">
-            <div class="card__info">
-                <h3 class="card__title over">Абхазия</h3>
-                <button class="button-like button" type="button"></button>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card__photo" src="./images/card__altay.jpg" alt="Алтай">
-            <div class="card__info">
-                <h3 class="card__title over">Алтай</h3>
-                <button class="button-like button" type="button"></button>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card__photo" src="./images/card__dombay.jpg" alt="Домбай">
-            <div class="card__info">
-                <h3 class="card__title over">Домбай</h3>
-                <button class="button-like button" type="button"></button>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card__photo" src="./images/card__kamchatka.jpg" alt="Камчатка">
-            <div class="card__info">
-                <h3 class="card__title over">Камчатка</h3>
-                <button class="button-like button" type="button"></button>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card__photo" src="./images/card__karachaevo-cherkessia.jpg" alt="Карачаево-Черкессия">
-            <div class="card__info">
-                <h3 class="card__title over">Карачаево-Черкессия</h3>
-                <button class="button-like button" type="button"></button>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card__photo" src="./images/card__mountain-elbrus.jpg" alt="Гора Эльбрус">
-            <div class="card__info">
-                <h3 class="card__title over">Эльбрус</h3>
-                <button class="button-like button" type="button"></button>
-            </div>
-        </div>
     </main>
 
     <footer class="footer">
         <p class="footer__copyright">© 2022 Делибалт Александра</p>
     </footer>
 
-    <section class="popup">
-        <form class="popup__container" action="URL" method="get" name="form_about-you">
+    <section class="popup popup_form_edit">
+        <form class="popup__container popup__container_edit" action="URL" method="get" name="form_about-you">
             <h2 class="popup__title">Редактировать профиль</h2>
             <input type="text" placeholder="Имя" class="input input_name" name="input_name" value="">
             <input type="text" placeholder="О себе" class="input input_status" name="input_status" value="">
             <button class="button-save button" type="submit">Сохранить</button>
             <button class="button-close button" type="button"></button>
         </form>
-
     </section>
 
+    <section class="popup popup_form_add">
+        <form class="popup__container popup__container_add" action="URL" method="get" name="form_new-card">
+            <h2 class="popup__title">Новое место</h2>
+            <input type="text" placeholder="Название" class="input input_name-of-place" name="input_name-of-place"
+                value="">
+            <input type="text" placeholder="Ссылка на картинку" class="input input_url" name="input_url" value="">
+            <button class="button-save button" type="submit">Создать</button>
+            <button class="button-close button" type="button"></button>
+        </form>
+    </section>
+
+    <section class='popup popup__photo'>
+        <div class='wrapper'>
+            <div>
+                <img class="popup__bigPhoto" src="" alt="">
+                <h3 class="popup__subtitle"></h3>
+            </div>
+            <button class="button-close button button-close_photo" type="button"></button>
+        </div>
+    </section>
+
+    <template class='template__card'>
+        <div class="card">
+            <img class="card__photo" src="" alt="">
+            <button class="button-delete button" type="button"></button>
+            <div class="card__info">
+                <h3 class="card__title over"></h3>
+                <button class="button-like button" type="button"></button>
+            </div>
+        </div>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 
