@@ -1,5 +1,6 @@
 .card__title {
     margin: 0;
+    max-width: 85%;
     font-family: Inter, serif, Arial;
     font-style: normal;
     font-weight: 900;
