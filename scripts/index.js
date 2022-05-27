@@ -52,13 +52,17 @@ function createCard({ name, link }) {
     const newCard = templateCard.cloneNode(true);
     const titleCard = newCard.querySelector('.card__title');
     const photoLinkCard = newCard.querySelector('.card__photo');
-    buttonLike = newCard.querySelectorAll('.button-like').forEach((onelike) => onelike.addEventListener('click', function (evt) {
+    newCard.querySelector('.button-like').addEventListener('click', function (evt) {
         evt.target.classList.toggle('button-like_active');
-    }));
-    buttonDelete = document.querySelectorAll('.button-delete').forEach((item) => item.addEventListener('click', function (evt) {
+    });
+    newCard.querySelector('.button-delete').addEventListener('click', function (evt) {
         const evtTarget = evt.target.closest('.card');
         evtTarget.remove();
-    }));
+    });
+    newCard.querySelector('.card__photo').addEventListener('click', function (evt) {
+        openPopup(popupPhoto);
+        openPhoto(evt);
+    });
     titleCard.textContent = name;
     photoLinkCard.src = link;
     photoLinkCard.alt = name;
@@ -99,10 +103,6 @@ function formAddsubmit(evt) {
     cards.prepend(createCard({ name, link }));
     inputNamePlace.value = ''; /* Очищение инпутов для послед. доб. карточек*/
     inputURL.value = '';
-    cardPhoto = document.querySelectorAll('.card__photo').forEach((photo) => photo.addEventListener('click', function (evt) {
-        openPopup(popupPhoto);
-        openPhoto(evt);
-    }));
     closePopup(evt);
 }
 
