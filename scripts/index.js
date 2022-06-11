@@ -36,10 +36,10 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-const inputName = popupFormEdit.querySelector('.input__name');
-const inputStatus = popupFormEdit.querySelector('.input__status');
-const inputNamePlace = popupFormAdd.querySelector('.input__name-of-place');
-const inputURL = popupFormAdd.querySelector('.input__url');
+const inputName = popupFormEdit.querySelector('.input_name');
+const inputStatus = popupFormEdit.querySelector('.input_status');
+const inputNamePlace = popupFormAdd.querySelector('.input_name-of-place');
+const inputURL = popupFormAdd.querySelector('.input_url');
 const profileName = profile.querySelector('.profile__name');
 const profileStatus = profile.querySelector('.profile__status');
 const popupPhotoBig = popupPhoto.querySelector('.popup__bigPhoto');
