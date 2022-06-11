@@ -12,10 +12,6 @@
     text-align: center;
 }
 
-.button-submit:hover {
-    opacity: 0.85;
-}
-
 @media screen and (max-width: 450px) {
     .button-submit {
         width: 100%;

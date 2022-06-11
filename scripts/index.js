@@ -1,5 +1,5 @@
 const profile = document.querySelector('.profile');
-const popup = document.querySelectorAll('.popup');
+const popup = document.querySelectorAll('.popup');/*Содержатся все три попапа*/
 const popupFormEdit = document.querySelector('.popup_form_edit');
 const popupFormAdd = document.querySelector('.popup_form_add');
 const popupContainerEdit = document.querySelector('.popup__container_edit');
@@ -75,7 +75,7 @@ function createCard({ name, link }) {
 /*Открытие Popup*/
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', evt => closePopupEsc(evt, popup));
+    document.addEventListener('keydown', getPopup(popup));
 }
 
 /* Увеличение фото*/
@@ -92,7 +92,7 @@ function hideClosestPopup(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', evt => closePopupEsc(evt, popup));
+    document.removeEventListener('keydown', getPopup(popup));
 }
 
 function closePopupOverlay(evt) {
@@ -100,13 +100,15 @@ function closePopupOverlay(evt) {
         hideClosestPopup(evt);
     };
 }
-
-function closePopupEsc(evt, popup) {
-    console.log(evt.key);
-    if (evt.key === 'Escape') {
-        closePopup(popup);
-    };
+/*двойная функция,чтобы получить и параметр event и popup от пред. функции*/
+function getPopup(popup) {
+    return function closePopupEsc(evt) {
+        if (evt.key === 'Escape') {
+            closePopup(popup);
+        };
+    }
 }
+
 /*Сохранение и отсылка данных формы редактирования на сервер*/
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -119,8 +121,9 @@ function handleCardFormSubmit(evt) {
     evt.preventDefault();
     const name = inputNamePlace.value;
     const link = inputURL.value;
+    const inputListCard = [inputNamePlace, inputURL];
     cards.prepend(createCard({ name, link }));
-    evt.target.reset();
+    resetForm(evt, inputListCard);
     hideClosestPopup(evt);
 }
 
