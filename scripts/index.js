@@ -1,4 +1,5 @@
 const profile = document.querySelector('.profile');
+const popup = document.querySelectorAll('.popup');
 const popupFormEdit = document.querySelector('.popup_form_edit');
 const popupFormAdd = document.querySelector('.popup_form_add');
 const popupContainerEdit = document.querySelector('.popup__container_edit');
@@ -35,10 +36,10 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-const inputName = popupFormEdit.querySelector('.input_name');
-const inputStatus = popupFormEdit.querySelector('.input_status');
-const inputNamePlace = popupFormAdd.querySelector('.input_name-of-place');
-const inputURL = popupFormAdd.querySelector('.input_url');
+const inputName = popupFormEdit.querySelector('.input__name');
+const inputStatus = popupFormEdit.querySelector('.input__status');
+const inputNamePlace = popupFormAdd.querySelector('.input__name-of-place');
+const inputURL = popupFormAdd.querySelector('.input__url');
 const profileName = profile.querySelector('.profile__name');
 const profileStatus = profile.querySelector('.profile__status');
 const popupPhotoBig = popupPhoto.querySelector('.popup__bigPhoto');
@@ -74,6 +75,7 @@ function createCard({ name, link }) {
 /*Открытие Popup*/
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', evt => closePopupEsc(evt, popup));
 }
 
 /* Увеличение фото*/
@@ -90,8 +92,21 @@ function hideClosestPopup(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', evt => closePopupEsc(evt, popup));
 }
 
+function closePopupOverlay(evt) {
+    if (evt.target === evt.currentTarget) {
+        hideClosestPopup(evt);
+    };
+}
+
+function closePopupEsc(evt, popup) {
+    console.log(evt.key);
+    if (evt.key === 'Escape') {
+        closePopup(popup);
+    };
+}
 /*Сохранение и отсылка данных формы редактирования на сервер*/
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -110,14 +125,15 @@ function handleCardFormSubmit(evt) {
 }
 
 initialCards.forEach(renderCard);
-editButton.addEventListener('click', function () {
+editButton.addEventListener('click', function (evt) {
     openPopup(popupFormEdit);
     inputName.value = profileName.textContent;
     inputStatus.value = profileStatus.textContent;
 });
-addButton.addEventListener('click', function () {
+addButton.addEventListener('click', function (evt) {
     openPopup(popupFormAdd);
 });
 closeButtons.forEach((closeButton) => closeButton.addEventListener('click', hideClosestPopup));
 popupContainerEdit.addEventListener('submit', handleProfileFormSubmit);
 popupContainerAdd.addEventListener('submit', handleCardFormSubmit);
+popup.forEach((popupElement) => popupElement.addEventListener('click', closePopupOverlay));

@@ -1,4 +1,4 @@
-.button-save {
+.button-submit {
     border: none;
     background-color: black;
     color: white;
@@ -12,12 +12,12 @@
     text-align: center;
 }
 
-.button-save:hover {
+.button-submit:hover {
     opacity: 0.85;
 }
 
 @media screen and (max-width: 450px) {
-    .button-save {
+    .button-submit {
         width: 100%;
         font-size: 14px;
         line-height: 17px;

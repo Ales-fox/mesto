@@ -1,0 +1,7 @@
+.input-error_active {
+    visibility: visible;
+}
+
+.input-error_active:last-of-type {
+    margin-top: -43px;
+}
