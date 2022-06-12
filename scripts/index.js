@@ -1,5 +1,5 @@
 const profile = document.querySelector('.profile');
-const popup = document.querySelectorAll('.popup');/*Содержатся все три попапа*/
+const popupList = document.querySelectorAll('.popup');
 const popupFormEdit = document.querySelector('.popup_form_edit');
 const popupFormAdd = document.querySelector('.popup_form_add');
 const popupContainerEdit = document.querySelector('.popup__container_edit');
@@ -75,7 +75,7 @@ function createCard({ name, link }) {
 /*Открытие Popup*/
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', getPopup(popup));
+    document.addEventListener('keydown', closePopupEsc);
 }
 
 /* Увеличение фото*/
@@ -92,21 +92,22 @@ function hideClosestPopup(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', getPopup(popup));
+    document.removeEventListener('keydown', closePopupEsc);
 }
 
+/*Закрытие popup нажатием на темный фон*/
 function closePopupOverlay(evt) {
     if (evt.target === evt.currentTarget) {
         hideClosestPopup(evt);
     };
 }
-/*двойная функция,чтобы получить и параметр event и popup от пред. функции*/
-function getPopup(popup) {
-    return function closePopupEsc(evt) {
-        if (evt.key === 'Escape') {
-            closePopup(popup);
-        };
-    }
+
+/*Закрытие popup клавишей Esc*/
+function closePopupEsc(evt) {
+    if (evt.key === 'Escape') {
+        const popupActive = document.querySelector('.popup_opened');
+        closePopup(popupActive);
+    };
 }
 
 /*Сохранение и отсылка данных формы редактирования на сервер*/
@@ -139,4 +140,4 @@ addButton.addEventListener('click', function (evt) {
 closeButtons.forEach((closeButton) => closeButton.addEventListener('click', hideClosestPopup));
 popupContainerEdit.addEventListener('submit', handleProfileFormSubmit);
 popupContainerAdd.addEventListener('submit', handleCardFormSubmit);
-popup.forEach((popupElement) => popupElement.addEventListener('click', closePopupOverlay));
+popupList.forEach((popupElement) => popupElement.addEventListener('click', closePopupOverlay));

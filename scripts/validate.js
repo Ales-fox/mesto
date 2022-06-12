@@ -43,7 +43,7 @@ const setEventListeners = (formElement, configValid) => {
             checkInputValidity(formElement, inputElement, configValid);
             // чтобы проверять его при изменении любого из полей
             buttonList.forEach((buttonElement) => {
-                toggleButtonState(inputList, buttonElement);
+                toggleButtonState(inputList, buttonElement, configValid.inactiveButtonClass);
             });
         });
     });
@@ -55,20 +55,21 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, classButtoninactive) => {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('button_invalid');
+        buttonElement.classList.add(classButtoninactive);
         buttonElementdisabled = true;
     } else {
-        buttonElement.classList.remove('button_invalid');
+        buttonElement.classList.remove(classButtoninactive);
         buttonElement.disabled = false;
     }
 };
 /*Обнуление формы и дезактивация кнопки*/
 const resetForm = (evt, inputList) => {
     evt.target.reset();
-    toggleButtonState(inputList, evt.submitter);
+    toggleButtonState(inputList, evt.submitter, 'button_invalid');
 };
+
 
 function enableValidation(configValid) {
     const formList = Array.from(document.querySelectorAll(`${configValid.formSelector}`));
