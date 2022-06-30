@@ -36,6 +36,7 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+
 const inputName = popupFormEdit.querySelector('.input_name');
 const inputStatus = popupFormEdit.querySelector('.input_status');
 const inputNamePlace = popupFormAdd.querySelector('.input_name-of-place');
@@ -45,41 +46,18 @@ const profileStatus = profile.querySelector('.profile__status');
 const popupPhotoBig = popupPhoto.querySelector('.popup__bigPhoto');
 const popupPhotoSubtitle = popupPhoto.querySelector(".popup__subtitle");
 
-/*Отображение 6 начальных карточек на странице*/
-function renderCard({ name, link }) {
-    cards.append(createCard({ name, link }));
-}
+import { Card } from './card.js'
+import { FormValidator, configValid } from './validate.js'
 
-/*Добавление новой карточки*/
-function createCard({ name, link }) {
-    const newCard = templateCard.cloneNode(true);
-    const titleCard = newCard.querySelector('.card__title');
-    const photoLinkCard = newCard.querySelector('.card__photo');
-    newCard.querySelector('.button-like').addEventListener('click', function (evt) {
-        evt.target.classList.toggle('button-like_active');
-    });
-    newCard.querySelector('.button-delete').addEventListener('click', function (evt) {
-        const evtTarget = evt.target.closest('.card');
-        evtTarget.remove();
-    });
-    newCard.querySelector('.card__photo').addEventListener('click', function () {
-        openPopup(popupPhoto);
-        openPhoto(name, link);
-    });
-    titleCard.textContent = name;
-    photoLinkCard.src = link;
-    photoLinkCard.alt = name;
-    return newCard;
-}
 
 /*Открытие Popup*/
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupEsc);
 }
 
 /* Увеличение фото*/
-function openPhoto(name, link) {
+export function openPhoto(name, link) {
     popupPhotoBig.src = link;
     popupPhotoBig.alt = name;
     popupPhotoSubtitle.textContent = name;
@@ -123,12 +101,28 @@ function handleCardFormSubmit(evt) {
     const name = inputNamePlace.value;
     const link = inputURL.value;
     const inputListCard = [inputNamePlace, inputURL];
-    cards.prepend(createCard({ name, link }));
-    resetForm(evt, inputListCard);
+    cards.prepend(toCreateCard({ name, link }));
+    const validation = new FormValidator(configValid, configValid.formSelector);
+    validation.resetForm(evt, inputListCard);
     hideClosestPopup(evt);
 }
 
-initialCards.forEach(renderCard);
+function toCreateCard({ name, link }) {
+    const cardClass = new Card({ name, link }, '.template__card');
+    const cardElement = cardClass.createCard();
+    return cardElement
+}
+
+function firstValidation() {
+    const validation = new FormValidator(configValid, configValid.formSelector);
+    validation.enableValidation();
+}
+firstValidation();
+
+/*initialCards.forEach(renderCard);*/
+initialCards.forEach(({ name, link }) => {
+    cards.append(toCreateCard({ name, link }));
+});
 editButton.addEventListener('click', function (evt) {
     openPopup(popupFormEdit);
     inputName.value = profileName.textContent;
@@ -141,3 +135,5 @@ closeButtons.forEach((closeButton) => closeButton.addEventListener('click', hide
 popupContainerEdit.addEventListener('submit', handleProfileFormSubmit);
 popupContainerAdd.addEventListener('submit', handleCardFormSubmit);
 popupList.forEach((popupElement) => popupElement.addEventListener('click', closePopupOverlay));
+
+export { templateCard, popupPhoto, initialCards };
