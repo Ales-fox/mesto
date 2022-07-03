@@ -12,6 +12,13 @@
     background-position: center;
 }
 
+@media screen and (max-width: 900px) {
+    .button-add {
+        width: 10%;
+        height: 40px;
+    }
+}
+
 @media screen and (max-width: 450px) {
     .button-add {
         width: 100%;
