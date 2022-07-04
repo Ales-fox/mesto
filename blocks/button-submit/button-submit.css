@@ -2,7 +2,7 @@
     border: none;
     background-color: black;
     color: white;
-    width: 358px;
+    width: 100%;
     height: 50px;
     font-family: Inter, serif, Arial;
     font-style: normal;
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 450px) {
     .button-submit {
-        width: 100%;
+        height: 46px;
         font-size: 14px;
         line-height: 17px;
     }

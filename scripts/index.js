@@ -34,7 +34,14 @@ const initialCards = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
+const formSelectors = {
+    form: '.popup__container',
+    inputSelector: '.input',
+    submitButtonSelector: '.button-submit',
+    inactiveButtonClass: 'button_invalid',
+    inputErrorClass: 'input_type_error',
+    errorClass: 'input-error'
+};
 const inputName = popupFormEdit.querySelector('.input_name');
 const inputStatus = popupFormEdit.querySelector('.input_status');
 const inputNamePlace = popupFormAdd.querySelector('.input_name-of-place');
@@ -45,12 +52,12 @@ const popupPhotoBig = popupPhoto.querySelector('.popup__bigPhoto');
 const popupPhotoSubtitle = popupPhoto.querySelector(".popup__subtitle");
 const formEditProfile = document.querySelector('.popup__container_edit');
 const formAddCard = document.querySelector('.popup__container_add');
-const profileValidation = new FormValidator(selectorsForm, formEditProfile);
-const newCardValidation = new FormValidator(selectorsForm, formAddCard);
+const profileValidation = new FormValidator(formSelectors, formEditProfile);
+const newCardValidation = new FormValidator(formSelectors, formAddCard);
 
 
-import { Card } from './card.js'
-import { FormValidator, selectorsForm } from './formValidator.js'
+import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
 
 /*Открытие Popup*/
 function openPopup(popup) {
@@ -90,10 +97,6 @@ function closePopupEsc(evt) {
     };
 }
 
-function resetForm(evt) {
-    evt.target.reset();
-}
-
 /*Сохранение и отсылка данных формы редактирования на сервер*/
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -107,7 +110,7 @@ function handleCardFormSubmit(evt) {
     const name = inputNamePlace.value;
     const link = inputURL.value;
     cardsContainer.prepend(toCreateCard({ name, link }));
-    resetForm(evt);
+    evt.target.reset();/*Очистка формы*/
     newCardValidation.resetValidation();
     hideClosestPopup(evt);
 }

@@ -10,3 +10,7 @@
     display: block;
     min-height: 30px;
 }
+
+.input-error:last-of-type {
+    margin-top: -43px;
+}

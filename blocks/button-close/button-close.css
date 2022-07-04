@@ -10,6 +10,17 @@
     padding: 0;
 }
 
+@media screen and (max-width: 550px) {
+    .button-close {
+        width: 25px;
+        height: 25px;
+        background-size: cover;
+        right: -33px;
+        top: -33px;
+    }
+}
+
+
 @media screen and (max-width: 450px) {
     .button-close {
         width: 20px;
