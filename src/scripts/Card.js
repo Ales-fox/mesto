@@ -1,9 +1,11 @@
-class Card {
-    constructor({ name, link }, cardSelector, openPhoto) {
+import PopupWithImage from "./PopupWithImage.js";
+export default class Card {
+    constructor({ name, link }, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
         this._name = name;
         this._link = link;
-        this._openPhoto = openPhoto;
+        this._handleCardClick = handleCardClick;
+        /*const popupImage = new PopupWithImage('.popup_photo');*/
     }
     /*Создание карточки*/
     createCard() {
@@ -26,19 +28,17 @@ class Card {
     /*Установка слушателей*/
     _setEventListeners(newCard) {
         newCard.querySelector('.button-like').addEventListener('click', (evt) => { this._setEventLike(evt) });
-        newCard.querySelector('.button-delete').addEventListener('click', () => { this._setEventRemoveCard() });
+        newCard.querySelector('.button-delete').addEventListener('click', () => { this._setEventRemoveCard(newCard) });
         this.photoLinkCard.addEventListener('click', () => {
-            this._openPhoto(this._name, this._link); /*Стрелочная функция,чтобы принимала верный this. Так же можно использовать метод bind()*/
+            this._handleCardClick(this._name, this._link); /*Стрелочная функция,чтобы принимала верный this. Так же можно использовать метод bind()*/
         });
     }
 
     _setEventLike(evt) {
         evt.target.classList.toggle('button-like_active');
     }
-    _setEventRemoveCard() {
-        this._newCard.remove();
-        this._newCard = null;
+    _setEventRemoveCard(newCard) {
+        newCard.remove();
+        newCard = null;
     }
 }
-
-export { Card };
