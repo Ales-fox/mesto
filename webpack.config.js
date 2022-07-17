@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 
 module.exports = {
-    entry: './src/scripts/index.js',
+    entry: './src/pages/index.js',
     mode: 'production',
     devtool: 'inline-source-map',
     output: {
@@ -30,7 +30,8 @@ module.exports = {
         new CleanWebpackPlugin()
     ],
     performance: {
-        maxAssetSize: 1000000,
+        maxEntrypointSize: 750000, /*Увеличение лимита рамера css файла*/
+        maxAssetSize: 1000000, /*Увеличение лимита рамера картинок*/
     },
     module: {
         rules: [{

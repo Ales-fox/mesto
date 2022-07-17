@@ -1,11 +1,11 @@
-import '../pages/index.css';
+import './index.css'
 
-import Card from './components/Card.js'
-import FormValidator from './components/FormValidator.js'
-import Section from './components/Section.js'
-import PopupWithImage from './components/PopupWithImage.js'
-import PopupWithForm from './components/PopupWithForm.js'
-import UserInfo from './components/UserInfo.js'
+import Card from '../components/Card.js'
+import FormValidator from '../components/FormValidator.js'
+import Section from '../components/Section.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 
 const profile = document.querySelector('.profile');
 const popupFormEdit = document.querySelector('.popup_form_edit');
@@ -65,7 +65,7 @@ const userData = new UserInfo('.input_name', '.input_status')
 const defaultCardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const initialCard = new Card(item, templateCard, handleCardClick);
+        const initialCard = new Card(item, '.template__card', handleCardClick);
         const cardElement = initialCard.createCard();
         defaultCardList.addItem(cardElement);
     }
@@ -96,7 +96,7 @@ function handleCardFormSubmit() {
 
 
 function toCreateCard({ name, link }) {
-    const cardNew = new Card({ name, link }, templateCard, handleCardClick);
+    const cardNew = new Card({ name, link }, '.template__card', handleCardClick);
     const cardElement = cardNew.createCard();
     return cardElement
 }

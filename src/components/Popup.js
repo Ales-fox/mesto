@@ -2,16 +2,17 @@ export default class Popup {
     constructor(selectorPopup) {
         this._popup = document.querySelector(selectorPopup);
         this._buttonClose = this._popup.querySelector('.button-close');
+        this._handleEscClosebind = this._handleEscClose.bind(this);
     }
 
     open() {
         this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose.bind(this));
+        document.addEventListener('keydown', this._handleEscClosebind);
     }
 
     close() {
         this._popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscClose.bind(this));
+        document.removeEventListener('keydown', this._handleEscClosebind);
     }
     /*Закрытие popup клавишей Esc*/
     _handleEscClose(evt) {
