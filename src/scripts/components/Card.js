@@ -1,4 +1,3 @@
-import PopupWithImage from "./PopupWithImage.js";
 export default class Card {
     constructor({ name, link }, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
