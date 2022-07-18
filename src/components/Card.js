@@ -1,43 +1,42 @@
 export default class Card {
-    constructor({ name, link }, cardSelector, handleCardClick) {
+    constructor({ nameofplace, url }, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
-        this._name = name;
-        this._link = link;
+        this._name = nameofplace;
+        this._url = url;
         this._handleCardClick = handleCardClick;
-        /*const popupImage = new PopupWithImage('.popup_photo');*/
     }
     /*Создание карточки*/
     createCard() {
-        const newCard = document
+        this._newCard = document
             .querySelector(this._cardSelector)
             .content
             .querySelector('.card')
             .cloneNode(true);
-        const titleCard = newCard.querySelector('.card__title');
-        this.photoLinkCard = newCard.querySelector('.card__photo');
+        const titleCard = this._newCard.querySelector('.card__title');
+        this.photoLinkCard = this._newCard.querySelector('.card__photo');
 
-        this._setEventListeners(newCard);
+        this._setEventListeners();
 
         titleCard.textContent = this._name;
-        this.photoLinkCard.src = this._link;
+        this.photoLinkCard.src = this._url;
         this.photoLinkCard.alt = this._name;
 
-        return newCard;
+        return this._newCard;
     }
     /*Установка слушателей*/
-    _setEventListeners(newCard) {
-        newCard.querySelector('.button-like').addEventListener('click', (evt) => { this._setEventLike(evt) });
-        newCard.querySelector('.button-delete').addEventListener('click', () => { this._setEventRemoveCard(newCard) });
+    _setEventListeners() {
+        this._newCard.querySelector('.button-like').addEventListener('click', (evt) => { this._toggleLike(evt) });
+        this._newCard.querySelector('.button-delete').addEventListener('click', () => { this._deleteCard() });
         this.photoLinkCard.addEventListener('click', () => {
-            this._handleCardClick(this._name, this._link); /*Стрелочная функция,чтобы принимала верный this. Так же можно использовать метод bind()*/
+            this._handleCardClick(this._name, this._url); /*Стрелочная функция,чтобы принимала верный this. Так же можно использовать метод bind()*/
         });
     }
 
-    _setEventLike(evt) {
+    _toggleLike(evt) {
         evt.target.classList.toggle('button-like_active');
     }
-    _setEventRemoveCard(newCard) {
-        newCard.remove();
-        newCard = null;
+    _deleteCard() {
+        this._newCard.remove();
+        this._newCard = null;
     }
 }

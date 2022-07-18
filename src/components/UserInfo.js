@@ -1,17 +1,22 @@
-import { profileName, profileStatus } from '../pages/index.js'
-
 export default class UserInfo {
     constructor(nameSelector, statusSelector) {
-        this._nameSelector = nameSelector;
-        this._statusSelector = statusSelector;
+        this._profileName = document.querySelector(nameSelector);
+        this._profileStatus = document.querySelector(statusSelector);
     }
 
     getUserInfo() {
-        this._inputName = document.querySelector(this._nameSelector);
-        this._inputStatus = document.querySelector(this._statusSelector);
+        this._name = this._profileName.textContent;
+        this._status = this._profileStatus.textContent;
+        this.info = {
+            name: this._name,
+            status: this._status
+        };
+
+        return this.info
     }
-    setUserInfo() {
-        profileName.textContent = this._inputName.value;
-        profileStatus.textContent = this._inputStatus.value;
+
+    setUserInfo(inputName, inputStatus) {
+        this._profileName.textContent = inputName;
+        this._profileStatus.textContent = inputStatus;
     }
 }

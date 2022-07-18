@@ -1,6 +1,6 @@
 export default class FormValidator {
-    constructor(formSelectors, form) {
-        this._formSelectors = formSelectors;
+    constructor(config, form) {
+        this._config = config;
         this._form = form;
     }
 
@@ -10,8 +10,8 @@ export default class FormValidator {
     }
 
     _setEventListeners() {
-        this._inputList = Array.from(this._form.querySelectorAll(`${this._formSelectors.inputSelector}`));
-        this._buttonElement = this._form.querySelector(`${this._formSelectors.submitButtonSelector}`);
+        this._inputList = Array.from(this._form.querySelectorAll(`${this._config.inputSelector}`));
+        this._buttonElement = this._form.querySelector(`${this._config.submitButtonSelector}`);
         // чтобы проверить состояние кнопки в самом начале
         this._toggleButtonState();
 
@@ -27,10 +27,10 @@ export default class FormValidator {
 
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            this._buttonElement.classList.add(this._formSelectors.inactiveButtonClass);
+            this._buttonElement.classList.add(this._config.inactiveButtonClass);
             this._buttonElement.disabled = true;
         } else {
-            this._buttonElement.classList.remove(this._formSelectors.inactiveButtonClass);
+            this._buttonElement.classList.remove(this._config.inactiveButtonClass);
             this._buttonElement.disabled = false;
         }
     };
@@ -50,16 +50,16 @@ export default class FormValidator {
     };
 
     _showInputError(inputElement, errorMessage) {
-        const errorElement = this._form.querySelector(`.${this._formSelectors.errorClass}_${inputElement.id}`);
-        inputElement.classList.add(this._formSelectors.inputErrorClass);
+        const errorElement = this._form.querySelector(`.${this._config.errorClass}_${inputElement.id}`);
+        inputElement.classList.add(this._config.inputErrorClass);
         errorElement.textContent = errorMessage;
-        errorElement.classList.add(`${this._formSelectors.errorClass}_active`);
+        errorElement.classList.add(`${this._config.errorClass}_active`);
     };
 
     _hideInputError(inputElement) {
-        const errorElement = this._form.querySelector(`.${this._formSelectors.errorClass}_${inputElement.id}`);
-        inputElement.classList.remove(this._formSelectors.inputErrorClass);
-        errorElement.classList.remove(`${this._formSelectors.errorClass}_active`);
+        const errorElement = this._form.querySelector(`.${this._config.errorClass}_${inputElement.id}`);
+        inputElement.classList.remove(this._config.inputErrorClass);
+        errorElement.classList.remove(`${this._config.errorClass}_active`);
         errorElement.textContent = '';
     };
 
@@ -70,7 +70,3 @@ export default class FormValidator {
         });
     }
 }
-
-
-
-
