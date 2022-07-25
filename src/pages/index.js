@@ -67,8 +67,7 @@ function handleCardFormSubmit(obj) {
 /*Навешиваниеобработчиков событий на кнопки edit и add*/
 buttonEdit.addEventListener('click', function () {
     popupEdit.open();
-    userData.getUserInfo();
-    popupEdit.setInputValues(userData.info);
+    popupEdit.setInputValues(userData.getUserInfo());
 });
 buttonAdd.addEventListener('click', function () {
     formValidators['formCard'].resetValidation(); /*Выбираю нужную мне форму для valid*/
