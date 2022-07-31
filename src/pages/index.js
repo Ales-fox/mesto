@@ -1,4 +1,4 @@
-//import './index.css'
+import './index.css'
 
 import { buttonEdit, buttonAdd, config, formValidators, avatar, apiData } from '../utils/constants.js';
 import Card from '../components/Card.js'
