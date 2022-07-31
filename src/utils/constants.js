@@ -1,32 +1,7 @@
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.button-edit');
 const buttonAdd = profile.querySelector('.button-add');
-const initialCards = [
-    {
-        nameofplace: 'Архыз',
-        url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        nameofplace: 'Челябинская область',
-        url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        nameofplace: 'Иваново',
-        url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        nameofplace: 'Камчатка',
-        url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        nameofplace: 'Холмогорский район',
-        url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        nameofplace: 'Байкал',
-        url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+const avatar = profile.querySelector('.profile__avatar-hover');
 const config = {
     form: '.popup__container',
     inputSelector: '.input',
@@ -35,6 +10,15 @@ const config = {
     inputErrorClass: 'input_type_error',
     errorClass: 'input-error'
 };
+const apiData = {
+    urlDataProfile: 'https://nomoreparties.co/v1/cohort-46/users/me/',
+    urlCard: 'https://mesto.nomoreparties.co/v1/cohort-46/cards/',
+    urlAvatar: 'https://mesto.nomoreparties.co/v1/cohort-46/users/me/avatar/',
+    headers: {
+        authorization: '13749ec2-245f-4fcd-8f22-451e84bec66b',
+        'Content-Type': 'application/json'
+    }
+};
 const formValidators = {};
 
-export { buttonEdit, buttonAdd, initialCards, config, formValidators };
+export { buttonEdit, buttonAdd, config, formValidators, avatar, apiData };
