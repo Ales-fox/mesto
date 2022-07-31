@@ -1,4 +1,4 @@
-import './index.css'
+//import './index.css'
 
 import { buttonEdit, buttonAdd, config, formValidators, avatar, apiData } from '../utils/constants.js';
 import Card from '../components/Card.js'
@@ -11,6 +11,12 @@ import Api from '../components/Api.js'
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js'
 
 const api = new Api(apiData);
+const cardList = new Section({
+    renderer: (item) => {
+        const cardElement = createCard(item);
+        cardList.addItem(cardElement);
+    }
+}, '.cards');
 const popupEdit = new PopupWithForm('.popup_form_edit', handleProfileFormSubmit);
 const popupAdd = new PopupWithForm('.popup_form_add', handleCardFormSubmit);
 const popupImage = new PopupWithImage('.popup_photo');
@@ -36,36 +42,24 @@ const enableValidation = (config) => {
 
 enableValidation(config);
 
-//Первоначальная загрузка информации о пользователе с сервера
-api.getData(apiData.urlDataProfile).then(items => {
-    userData.saveServerInformation(items);
-    userData.setUserInfo(items.name, items.about);
-    userData.setUserAvatar(items.avatar);
-}).catch((error) => console.log(error));
-
-//Получение данных для первых карточек c сервера
-function createCardOnServer() {
-    api.getData(apiData.urlCard).then(items => {
-        const cardList = new Section({
-            items: items, /*Передаю массив объектов, полученный с сервера*/
-            renderer: (item) => {
-                const cardElement = createCard(item);
-                cardList.addItem(cardElement);
-            }
-        }, '.cards');
-        cardList.renderItems(); /*вызов рендера начальных карточек*/
-    }).catch((error) => console.log(error));
-}
+//Первоначальная загрузка информации о пользователе и с сервера и получение начальных карточек
+Promise.all([api.getDataProfile(), api.getDataCard()])
+    .then(([itemsUserData, itemsCard]) => {
+        userData.saveServerInformation(itemsUserData);
+        userData.setUserInfo(itemsUserData.name, itemsUserData.about);
+        userData.setUserAvatar(itemsUserData.avatar);
+        //вызов рендера начальных карточек
+        cardList.renderItems(itemsCard);
+    });
 
 /*Создание новых карточек*/
 function createCard(obj) {
     //Чтобы при передаче метода не терялся контекст this методы записаны как стрелочные функции
-    const cardNew = new Card(obj, '.template__card', apiData.urlCard, handleCardClick, api.deleteCard, api.deleteLikes, api.putLikes, popupDelete.open.bind(popupDelete), userData.getFullPackInfoObj);
+    const cardNew = new Card(obj, '.template__card', handleCardClick, api.deleteLikes, api.putLikes,
+        popupDelete.open.bind(popupDelete), userData.getFullPackInfoObj);
     const cardElement = cardNew.createCard();
     return cardElement
 }
-
-createCardOnServer();
 
 function handleCardClick(name, url) {
     popupImage.open(name, url);
@@ -74,7 +68,7 @@ function handleCardClick(name, url) {
 /*Сохранение и отсылка данных формы редактирования на сервер*/
 function handleProfileFormSubmit(obj, buttonSubmit) {
     renderLoading(true, buttonSubmit);
-    api.sendData(apiData.urlDataProfile, obj).then(obj => {
+    api.sendDataProfile(obj).then(obj => {
         userData.setUserInfo(obj.name, obj.about);
         popupEdit.close();
     }).catch(e => console.error(e));
@@ -84,21 +78,25 @@ function handleProfileFormSubmit(obj, buttonSubmit) {
 /*Сохранение и отсылка данных на сервер, а так же последующее добавление новой карточки*/
 function handleCardFormSubmit(obj, buttonSubmit) {
     renderLoading(true, buttonSubmit);
-    api.postCard(apiData.urlCard, obj).then(obj => {
-        createCardOnServer();
+    api.postCard(obj).then(obj => {
+        const cardElement = createCard(obj);
+        cardList.prependItem(cardElement);
         popupAdd.close();
     }).catch(e => console.error(e));
     renderLoading(false, buttonSubmit);
 }
 /*Удаление карточки только после подтверждения*/
-function handleDeleteCardSubmit(deleteCard) {
-    deleteCard();
+function handleDeleteCardSubmit(deleteCard, id) {
+    api.deleteCard(id).then(() => {
+        deleteCard();
+        popupDelete.close();
+    }).catch(e => console.error(e));
 }
 
 /*Сохранение данных и последующая замена аватара*/
 function handleAvatarFormSubmit(obj, buttonSubmit) {
     renderLoading(true, buttonSubmit);
-    api.sendData(apiData.urlAvatar, obj).then(obj => {
+    api.sendDataAvatar(obj).then(obj => {
         userData.setUserAvatar(obj.avatar);
         popupUpdateAvatar.close();
     }).catch(e => console.error(e));

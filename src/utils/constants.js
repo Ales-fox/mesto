@@ -11,9 +11,7 @@ const config = {
     errorClass: 'input-error'
 };
 const apiData = {
-    urlDataProfile: 'https://nomoreparties.co/v1/cohort-46/users/me/',
-    urlCard: 'https://mesto.nomoreparties.co/v1/cohort-46/cards/',
-    urlAvatar: 'https://mesto.nomoreparties.co/v1/cohort-46/users/me/avatar/',
+    baseURL: 'https://nomoreparties.co/v1/cohort-46/',
     headers: {
         authorization: '13749ec2-245f-4fcd-8f22-451e84bec66b',
         'Content-Type': 'application/json'

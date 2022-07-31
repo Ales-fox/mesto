@@ -1,57 +1,76 @@
 export default class Api {
-    constructor({ headers }) {
+    constructor({ baseURL, headers }) {
+        this._baseURL = baseURL;
+        this._urlDataProfile = `${this._baseURL}users/me/`;
+        this._urlCard = `${this._baseURL}cards/`;
+        this._urlAvatar = `${this._baseURL}users/me/avatar/`;
         this._headers = headers;
     }
 
-    getData(url) {
-        return fetch(url, {
+    getDataProfile() {
+        return fetch(this._urlDataProfile, {
             headers: this._headers
-        }).then((r) => {
-            if (r.ok) {
-                return r.json();
-            } else {
-                Promise.reject(`Ошибка загрузки данных ${r.status}`);
-            }
-        })
+        }).then(res => this._getResponseData(res));
     }
 
-    sendData(url, obj) {
-        return fetch(url, {
+    getDataCard() {
+        return fetch(this._urlCard, {
+            headers: this._headers
+        }).then(res => this._getResponseData(res));
+    }
+
+    sendDataProfile(obj) {
+        return fetch(this._urlDataProfile, {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify(obj),
-        }).then(r => r.ok ? r.json() : Promise.reject(`Ошибка отправки данных ${r.status} ${r.statusText}`));
+        }).then(res => this._getResponseData(res));
     }
 
-    postCard = (url, obj) => {
-        return fetch(url, {
+    sendDataAvatar(obj) {
+        return fetch(this._urlAvatar, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify(obj),
+        }).then(res => this._getResponseData(res));
+    }
+
+    postCard = (obj) => {
+        return fetch(this._urlCard, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify(obj),
-        }).then(r => r.ok ? r.json() : Promise.reject(`Невозможно добавить карточку ${r.status} ${r.statusText}`));
+        }).then(res => this._getResponseData(res));
     }
     //Вывод функции через стрелочную чтобы при передаче данного метода в другой класс не терялся контекст this
     //Так же возможен вариант когда при передаче метода одного класса в другой класс
     //Закреплять this методом bind()
-    deleteCard = (url, id) => {
-        return fetch(`${url}${id}`, {
+    deleteCard = (id) => {
+        return fetch(`${this._urlCard}${id}`, {
             method: "DELETE",
             headers: this._headers,
-        }).then(r => r.ok ? r.json() : Promise.reject(`Невозможно удалить карточку' ${r.status} ${r.statusText}`));
+        }).then(res => this._getResponseData(res));
 
     }
 
-    deleteLikes = (url, id) => {
-        return fetch(`${url}${id}/likes`, {
-            method: "DELETE",
-            headers: this._headers,
-        }).then(r => r.ok ? r.json() : Promise.reject(`Ошибка удаления лайка' ${r.status} ${r.statusText}`));
-    }
-
-    putLikes = (url, id) => {
-        return fetch(`${url}${id}/likes`, {
+    putLikes = (id) => {
+        return fetch(`${this._urlCard}${id}/likes`, {
             method: "PUT",
             headers: this._headers
-        }).then(r => r.ok ? r.json() : Promise.reject(`Ошибка установки лайка ${r.status} ${r.statusText}`));
+        }).then(res => this._getResponseData(res));
+    }
+
+    deleteLikes = (id) => {
+        return fetch(`${this._urlCard}${id}/likes`, {
+            method: "DELETE",
+            headers: this._headers,
+        }).then(res => this._getResponseData(res));
+    }
+
+    _getResponseData(res) {
+        if (!res.ok) {
+            return Promise.reject(`Ошибка: ${res.status}  ${res.statusText}`);
+        }
+        return res.json();
     }
 }

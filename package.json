@@ -1,4 +1,8 @@
 {
+  "name": "Mesto",
+  "version": "0.0.1",
+  "description": "Study project",
+  "author": "Ales",
   "devDependencies": {
     "@babel/core": "^7.18.6",
     "@babel/preset-env": "^7.18.6",
@@ -21,5 +25,8 @@
     "dev": "webpack serve",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "core-js": "^3.24.1"
   }
 }

@@ -1,14 +1,12 @@
 export default class Card {
-    constructor(obj, cardSelector, urlForApi, handleCardClick, deleteMethodCard, deleteLikes, putLikes, popupDelete, fullPackInfoObj) {
+    constructor(obj, cardSelector, handleCardClick, deleteLikes, putLikes, popupDelete, fullPackInfoObj) {
         this._name = obj.name;
         this._link = obj.link;
         this._id = obj._id;
         this._likes = obj.likes;
         this._ownerId = obj.owner._id;
         this._cardSelector = cardSelector;
-        this._url = urlForApi;
         this._handleCardClick = handleCardClick;
-        this._deleteMethodCard = deleteMethodCard;
         this._deleteLikes = deleteLikes;
         this._putLikes = putLikes;
         this._popupDelete = popupDelete;
@@ -38,7 +36,7 @@ export default class Card {
 
         for (let i = 0; i < this._likes.length; i++) {
             if (this._likes[i].name === this._myName) {
-                this.buttonLike.classList.add('button-like_active');
+                this._setClassLike();
                 break
             }
         }
@@ -64,7 +62,7 @@ export default class Card {
         });
 
         if (!this._buttonDelete.classList.contains('button-delete_inactive')) {
-            this._buttonDelete.addEventListener('click', () => { this._popupDelete(this._deleteCard.bind(this)) });
+            this._buttonDelete.addEventListener('click', () => { this._popupDelete(this._deleteCard.bind(this), this._id) });
         }
 
         this.photoLinkCard.addEventListener('click', () => {
@@ -73,24 +71,29 @@ export default class Card {
     }
 
     _addLike() {
-        this._putLikes(this._url, this._id).then((r) => {
-            this.buttonLike.classList.add('button-like_active');
+        this._putLikes(this._id).then((r) => {
+            this._setClassLike();
             this.cardCountLike.textContent = r.likes.length;
         }).catch(e => console.error(e));
     }
 
     _removeLike() {
-        this._deleteLikes(this._url, this._id).then((r) => {
-            this.buttonLike.classList.remove('button-like_active');
+        this._deleteLikes(this._id).then((r) => {
+            this._setClassLike();
             this.cardCountLike.textContent = r.likes.length;
         }).catch(e => console.error(e));
+    }
 
+    _setClassLike() {
+        this.buttonLike.classList.toggle('button-like_active');
     }
 
     _deleteCard() {
-        this._deleteMethodCard(this._url, this._id).then((r) => {
-            this._newCard.remove();
-            this._newCard = null;
-        }).catch(e => console.error(e));
+        this._deleteDomCard();
+        this._newCard = null;
+    }
+
+    _deleteDomCard() {
+        this._newCard.remove();
     }
 }
