@@ -71,8 +71,7 @@ function handleProfileFormSubmit(obj, buttonSubmit) {
     api.sendDataProfile(obj).then(obj => {
         userData.setUserInfo(obj.name, obj.about);
         popupEdit.close();
-    }).catch(e => console.error(e));
-    renderLoading(false, buttonSubmit);
+    }).catch(e => console.error(e)).finally(() => { renderLoading(false, buttonSubmit); });
 }
 
 /*Сохранение и отсылка данных на сервер, а так же последующее добавление новой карточки*/
@@ -82,8 +81,7 @@ function handleCardFormSubmit(obj, buttonSubmit) {
         const cardElement = createCard(obj);
         cardList.prependItem(cardElement);
         popupAdd.close();
-    }).catch(e => console.error(e));
-    renderLoading(false, buttonSubmit);
+    }).catch(e => console.error(e)).finally(() => { renderLoading(false, buttonSubmit); });
 }
 /*Удаление карточки только после подтверждения*/
 function handleDeleteCardSubmit(deleteCard, id) {
@@ -99,8 +97,7 @@ function handleAvatarFormSubmit(obj, buttonSubmit) {
     api.sendDataAvatar(obj).then(obj => {
         userData.setUserAvatar(obj.avatar);
         popupUpdateAvatar.close();
-    }).catch(e => console.error(e));
-    renderLoading(false, buttonSubmit);
+    }).catch(e => console.error(e)).finally(() => { renderLoading(false, buttonSubmit); });
 }
 
 function renderLoading(isLoading, buttonSubmit) {
@@ -121,5 +118,6 @@ buttonAdd.addEventListener('click', function () {
     popupAdd.open();
 });
 avatar.addEventListener('click', function () {
+    formValidators['formUpdateAvatar'].resetValidation();
     popupUpdateAvatar.open();
 })
